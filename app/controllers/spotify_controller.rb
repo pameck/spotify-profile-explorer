@@ -8,13 +8,13 @@ class SpotifyController < ActionController::Base
     render "index"
   end
 
-  def authorize
+  def login_user
     @spotify_random = SecureRandom.hex
 
     query_params = URI.encode_www_form({
       :client_id => ENV['SPOTIFY_CLIENT_ID'],
       :response_type => 'code',
-      :redirect_uri => 'http://localhost:3000/spotify/validateauth',
+      :redirect_uri => ENV['SPOTIFY_REDIRECT_URL'],
       :scope => 'user-read-private user-read-email',
       :state => @spotify_random
     })
