@@ -1,5 +1,6 @@
 require 'rest-client'
 require 'uri'
+require 'base64'
 
 class SpotifyController < ActionController::Base
   protect_from_forgery with: :exception
@@ -23,6 +24,22 @@ class SpotifyController < ActionController::Base
   end
 
   def authorize_finish
+    @spotify_auth_code = request.query_parameters['code']
+    authorization = Base64.strict_encode64("#{ENV['SPOTIFY_CLIENT_ID']}:#{ENV['SPOTIFY_SECRET']}")
+
+    begin
+      response = RestClient.post('https://accounts.spotify.com/api/token', {
+        grant_type: 'authorization_code',
+        code: @spotify_auth_code,
+        redirect_uri: ENV['SPOTIFY_REDIRECT_URL']
+      },
+
+      {:Authorization => "Basic #{authorization}"})
+    rescue Exception => e
+      redirect_to "/spotify"
+      return
+    end
+
     redirect_to "/spotify/dashboard"
   end
 
