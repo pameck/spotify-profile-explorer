@@ -1,5 +1,5 @@
-require 'cgi'
 require 'rest-client'
+require 'uri'
 
 class SpotifyController < ActionController::Base
   protect_from_forgery with: :exception
@@ -9,9 +9,17 @@ class SpotifyController < ActionController::Base
   end
 
   def authorize
-    go_to = CGI::escape('http://localhost:3000/spotify/validateauth')
     @spotify_random = SecureRandom.hex
-    redirect_to("https://accounts.spotify.com/authorize/?client_id=#{ENV['SPOTIFY_CLIENT_ID']}&response_type=code&redirect_uri=#{go_to}&scope=user-read-private%20user-read-email&state=#{@spotify_random}")
+
+    query_params = URI.encode_www_form({
+      :client_id => ENV['SPOTIFY_CLIENT_ID'],
+      :response_type => 'code',
+      :redirect_uri => 'http://localhost:3000/spotify/validateauth',
+      :scope => 'user-read-private user-read-email',
+      :state => @spotify_random
+    })
+
+    redirect_to("https://accounts.spotify.com/authorize/?#{query_params}")
   end
 
   def authorize_finish
