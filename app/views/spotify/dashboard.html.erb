@@ -1,33 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>SpotifyProfileExplorer</title>
-    <%= csrf_meta_tags %>
+<h1>Welcome, <%= @user.name %></h1>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<p id="notice"><%= notice %></p>
+<%= image_tag(@user.image, :alt => @user.name) %>
 
-  <body>
-    <%= yield %>
-    <h1>Welcome, <%= @user.name %></h1>
+<p>
+  <strong>Product:</strong>
+  <%= @user.product %>
+</p>
 
-    <p id="notice"><%= notice %></p>
-    <%= image_tag(@user.image, :alt => @user.name) %>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
 
-    <p>
-      <strong>Product:</strong>
-      <%= @user.product %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-
-    <p>
-      <strong>Country:</strong>
-      <%= @user.country %>
-    </p>
-  </body>
-</html>
+<p>
+  <strong>Country:</strong>
+  <%= @user.country %>
+</p>
