@@ -10,9 +10,24 @@
 
   <body>
     <%= yield %>
-    <h1>DASHBOARD</h1>
-    <p id="notice"><%= notice %></p>
-    <%= @user %>
+    <h1>Welcome, <%= @user.name %></h1>
 
+    <p id="notice"><%= notice %></p>
+    <%= image_tag(@user.image, :alt => @user.name) %>
+
+    <p>
+      <strong>Product:</strong>
+      <%= @user.product %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Country:</strong>
+      <%= @user.country %>
+    </p>
   </body>
 </html>

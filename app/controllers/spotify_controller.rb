@@ -75,15 +75,26 @@ class SpotifyController < ActionController::Base
   end
 
   private
-  def set_user
 
-    response = RestClient.get('https://api.spotify.com/v1/me',
+  def set_user
+    begin
+      response = RestClient.get('https://api.spotify.com/v1/me',
       {:Authorization => "Bearer #{session[:access_token]}"})
+    rescue Exception => e
+      redirect_to "/spotify"
+      return
+    end
+
     @user = parse_spotify_user_take_me_out(JSON.parse(response.body))
   end
 
   def parse_spotify_user_take_me_out (spotify_user)
-    return spotify_user
+   User.new(
+    name: spotify_user['display_name'],
+    country: spotify_user['country'],
+    image: spotify_user['images'].first['url'],
+    product: spotify_user['product'],
+    email: spotify_user['email'])
   end
 
 end
