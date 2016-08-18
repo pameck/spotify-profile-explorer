@@ -1,0 +1,1 @@
+json.partial! "spotify/user", user: @user

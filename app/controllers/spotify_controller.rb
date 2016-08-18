@@ -4,6 +4,8 @@ require 'base64'
 
 class SpotifyController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :set_user, only: [:dashboard]
+
   @@secret = ENV['SPOTIFY_SECRET']
   @@client_id = ENV['SPOTIFY_CLIENT_ID']
   @@redirect_url = ENV['SPOTIFY_REDIRECT_URL']
@@ -71,4 +73,17 @@ class SpotifyController < ActionController::Base
   def dashboard
     render "dashboard"
   end
+
+  private
+  def set_user
+
+    response = RestClient.get('https://api.spotify.com/v1/me',
+      {:Authorization => "Bearer #{session[:access_token]}"})
+    @user = parse_spotify_user_take_me_out(JSON.parse(response.body))
+  end
+
+  def parse_spotify_user_take_me_out (spotify_user)
+    return spotify_user
+  end
+
 end
