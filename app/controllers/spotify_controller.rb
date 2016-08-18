@@ -7,6 +7,18 @@ class SpotifyController < ActionController::Base
   @@secret = ENV['SPOTIFY_SECRET']
   @@client_id = ENV['SPOTIFY_CLIENT_ID']
   @@redirect_url = ENV['SPOTIFY_REDIRECT_URL']
+  @@scope_take_me_out = ['playlist-read-private',
+    'playlist-read-collaborative',
+    'playlist-modify-public',
+    'playlist-modify-private',
+    'user-follow-modify',
+    'user-follow-read',
+    'user-library-read',
+    'user-library-modify',
+    'user-read-private',
+    'user-read-birthdate',
+    'user-read-email',
+    'user-top-read']
 
   def show
     render "index"
@@ -19,7 +31,7 @@ class SpotifyController < ActionController::Base
       :client_id => @@client_id,
       :response_type => 'code',
       :redirect_uri => @@redirect_url,
-      :scope => 'user-read-private user-read-email',
+      :scope => @@scope_take_me_out.join(' '),
       :state => @spotify_random
     })
 
