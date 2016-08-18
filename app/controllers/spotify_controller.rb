@@ -48,7 +48,7 @@ class SpotifyController < ActionController::Base
     saved_state = params['state']
 
     unless state.eql? saved_state
-      redirect_to '/spotify/', :flash => { :error => "Spotify Authorization failed" }
+      redirect_to '/spotify', :flash => { :error => "Spotify Authorization failed" }
       return
     end
 
@@ -67,7 +67,7 @@ class SpotifyController < ActionController::Base
       return
     end
 
-    redirect_to "/spotify/dashboard"
+    redirect_to "dashboard"
   end
 
   def dashboard
