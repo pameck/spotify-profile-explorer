@@ -2,7 +2,7 @@ require 'rest-client'
 require 'uri'
 require 'base64'
 
-class SpotifyController < ActionController::Base
+class SpotifyController < ApplicationController
   protect_from_forgery with: :exception
   before_action :set_user, only: [:dashboard]
 
