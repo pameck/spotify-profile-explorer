@@ -1,26 +1,16 @@
 require 'rest-client'
 require 'uri'
 require 'base64'
+require 'spotify'
 
 class SpotifyController < ApplicationController
+
   protect_from_forgery with: :exception
   before_action :set_user, only: [:dashboard]
 
   @@secret = ENV['SPOTIFY_SECRET']
   @@client_id = ENV['SPOTIFY_CLIENT_ID']
   @@redirect_url = ENV['SPOTIFY_REDIRECT_URL']
-  @@scope_take_me_out = ['playlist-read-private',
-    'playlist-read-collaborative',
-    'playlist-modify-public',
-    'playlist-modify-private',
-    'user-follow-modify',
-    'user-follow-read',
-    'user-library-read',
-    'user-library-modify',
-    'user-read-private',
-    'user-read-birthdate',
-    'user-read-email',
-    'user-top-read']
 
   def show
     render "index"
@@ -33,7 +23,7 @@ class SpotifyController < ApplicationController
       :client_id => @@client_id,
       :response_type => 'code',
       :redirect_uri => @@redirect_url,
-      :scope => @@scope_take_me_out.join(' '),
+      :scope => Spotify::ALL_SCOPES.join(' '),
       :state => @spotify_random
     })
 
@@ -85,16 +75,6 @@ class SpotifyController < ApplicationController
       return
     end
 
-    @user = parse_spotify_user_take_me_out(JSON.parse(response.body))
+    @user = Spotify.parse(JSON.parse(response.body))
   end
-
-  def parse_spotify_user_take_me_out (spotify_user)
-   User.new(
-    name: spotify_user['display_name'],
-    country: spotify_user['country'],
-    image: spotify_user['images'].first['url'],
-    product: spotify_user['product'],
-    email: spotify_user['email'])
-  end
-
 end
