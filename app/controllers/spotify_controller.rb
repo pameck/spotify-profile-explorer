@@ -45,6 +45,9 @@ class SpotifyController < ActionController::Base
         redirect_uri: @@redirect_url
       }, {:Authorization => "Basic #{authorization}"})
 
+      session[:access_token] = JSON.parse(response.body)['access_token']
+      session[:refresh_token] = JSON.parse(response.body)['refresh_token']
+
     rescue Exception => e
       redirect_to "/spotify"
       return
