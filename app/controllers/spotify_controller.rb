@@ -27,6 +27,14 @@ class SpotifyController < ActionController::Base
     @spotify_auth_code = request.query_parameters['code']
     authorization = Base64.strict_encode64("#{ENV['SPOTIFY_CLIENT_ID']}:#{ENV['SPOTIFY_SECRET']}")
 
+    state = request.query_parameters['state']
+    saved_state = params['state']
+
+    unless state.eql? saved_state
+      redirect_to '/spotify/', :flash => { :error => "Spotify Authorization failed" }
+      return
+    end
+
     begin
       response = RestClient.post('https://accounts.spotify.com/api/token', {
         grant_type: 'authorization_code',
