@@ -1,24 +1,8 @@
-# README
+# Spotify Profile Explorer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Web application that will let you find things about your Spotify profile you didn't know about.
 
-Things you may want to cover:
+## Installation
+Expect this section changing soon.
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
