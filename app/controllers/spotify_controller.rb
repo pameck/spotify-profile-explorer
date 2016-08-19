@@ -65,14 +65,22 @@ class SpotifyController < ApplicationController
     begin
       response = RestClient.get("#{Spotify::ME_API_URL}/following?type=artist",
       {:Authorization => "Bearer #{session[:access_token]}"})
+      top_artists_response = RestClient.get("#{Spotify::ME_API_URL}/top/artists",
+      {:Authorization => "Bearer #{session[:access_token]}"})
+      top_tracks_response = RestClient.get("#{Spotify::ME_API_URL}/top/tracks",
+      {:Authorization => "Bearer #{session[:access_token]}"})
     rescue Exception => e
       redirect_to "/spotify"
       return
     end
 
-    @following = Spotify.parse_artists_list(JSON.parse(response.body))
+    @following = Spotify.parse_artists_list(JSON.parse(response.body)['artists'])
     @following.sort_by!{ |artist| artist.name.downcase }
 
+    @top_artists = Spotify.parse_artists_list(JSON.parse(top_artists_response.body))
+    @top_artists.sort_by!{ |artist| artist.name.downcase }
+
+    @top_tracks = Spotify.parse_tracks_list(JSON.parse(top_tracks_response.body))
     render "dashboard"
   end
 

@@ -1,7 +1,7 @@
 <h3>Welcome, <%= @user.name %></h3>
 
 <p id="notice"><%= notice %></p>
-<%= image_tag(@user.image, :alt => @user.name) %>
+<%= image_tag(@user.image, :alt => @user.name) unless @user.image.nil?%>
 
 <p>
   <strong>Product:</strong>
@@ -17,13 +17,24 @@
   <strong>Country:</strong>
   <%= @user.country %>
 </p>
-
-<table>
-  <tbody>
-    <% @following.each do |artist| %>
-      <tr>
-        <td><%= artist.name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+------------------------------------------------------------------<br>
+<strong>You're following these artists:</strong>
+<p>
+  <% @following.each do |artist| %>
+    <%= artist.name %> |
+  <% end %>
+</p>
+------------------------------------------------------------------<br>
+<strong>These are your top artists:</strong>
+<p>
+  <% @top_artists.each do |artist| %>
+    <%= artist.name %> |
+  <% end %>
+</p>
+------------------------------------------------------------------<br>
+<strong>These are your top tracks:</strong>
+<p>
+  <% @top_tracks.each do |track| %>
+   <strong><%= track.name %></strong> by <%= track.artist %> <br>
+  <% end %>
+</p>
