@@ -35,6 +35,7 @@ class SpotifyController < ApplicationController
     authorization = Base64.strict_encode64("#{@@client_id}:#{@@secret}")
 
     state = request.query_parameters['state']
+
     saved_state = params['state']
 
     unless state.eql? saved_state
@@ -61,6 +62,17 @@ class SpotifyController < ApplicationController
   end
 
   def dashboard
+    begin
+      response = RestClient.get("#{Spotify::ME_API_URL}/following?type=artist",
+      {:Authorization => "Bearer #{session[:access_token]}"})
+    rescue Exception => e
+      redirect_to "/spotify"
+      return
+    end
+
+    @following = Spotify.parse_artists_list(JSON.parse(response.body))
+    @following.sort_by!{ |artist| artist.name.downcase }
+
     render "dashboard"
   end
 
@@ -68,13 +80,13 @@ class SpotifyController < ApplicationController
 
   def set_user
     begin
-      response = RestClient.get('https://api.spotify.com/v1/me',
+      response = RestClient.get("#{Spotify::ME_API_URL}",
       {:Authorization => "Bearer #{session[:access_token]}"})
     rescue Exception => e
       redirect_to "/spotify"
       return
     end
 
-    @user = Spotify.parse(JSON.parse(response.body))
+    @user = Spotify.parse_user(JSON.parse(response.body))
   end
 end

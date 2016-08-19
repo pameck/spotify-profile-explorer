@@ -13,7 +13,9 @@ module Spotify
     'user-read-email',
     'user-top-read']
 
-  def self.parse (spotify_user)
+  ME_API_URL = 'https://api.spotify.com/v1/me'
+
+  def self.parse_user (spotify_user)
     User.new(
       name: spotify_user['display_name'],
       country: spotify_user['country'],
@@ -21,4 +23,22 @@ module Spotify
       product: spotify_user['product'],
       email: spotify_user['email'])
   end
+
+  def self.parse_artists_list (spotify_artists_list)
+
+    spotify_artists_list['artists']['items'].map { |spotify_artist|
+      self.parse_artist(spotify_artist)
+    }
+  end
+
+  def self.parse_artist(spotify_artist)
+    Artist.new(
+      name: spotify_artist['name'],
+      spotify_id: spotify_artist['id'],
+      genre: spotify_artist['genre'],
+      image: spotify_artist['images'].first['url'],
+      popularity: spotify_artist['popularity'],
+      followers_qty: spotify_artist['followers']['total'])
+  end
+
 end

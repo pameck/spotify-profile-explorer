@@ -17,3 +17,13 @@
   <strong>Country:</strong>
   <%= @user.country %>
 </p>
+
+<table>
+  <tbody>
+    <% @following.each do |artist| %>
+      <tr>
+        <td><%= artist.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
