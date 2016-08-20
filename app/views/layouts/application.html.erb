@@ -8,7 +8,32 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <h1>Spotify Profile Explorer</h1>
-    <%= yield %>
+    <div id="main-container" class="container">
+      <div class="row">
+        <div id="content" class="col-xs-12">
+          <h2 class="text-right">Spotify Profile Explorer</h2>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
+<html>
+  ....
+
+  <body>
+    <div id="main-container" class="container">
+      <div class="row">
+        <div id="sidebar" class="col-xs-3">
+          <!-- sidebar content -->
+        </div>
+        <div id="content" class="col-xs-9">
+          <!--  main content -->
+        </div>
+      </div>
+    </div>
   </body>
 </html>
