@@ -23,7 +23,7 @@ class SpotifyController < ApplicationController
       :client_id => @@client_id,
       :response_type => 'code',
       :redirect_uri => @@redirect_url,
-      :scope => Spotify::ALL_SCOPES.join(' '),
+      :scope => Spotify::REQUIRED_SCOPES.join(' '),
       :state => @spotify_random
     })
 

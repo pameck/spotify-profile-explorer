@@ -1,5 +1,6 @@
 module Spotify
 
+  REQUIRED_SCOPES = ['user-follow-read', 'user-top-read']
   ALL_SCOPES = ['playlist-read-private',
     'playlist-read-collaborative',
     'user-follow-read',
@@ -12,10 +13,7 @@ module Spotify
   def self.parse_user (spotify_user)
     User.new(
       name: spotify_user['display_name'],
-      country: spotify_user['country'],
-      image: spotify_user['images']&.first['url'],
-      product: spotify_user['product'],
-      email: spotify_user['email'])
+      image: spotify_user['images']&.first['url'])
   end
 
   def self.parse_artists_list (spotify_artists_list)

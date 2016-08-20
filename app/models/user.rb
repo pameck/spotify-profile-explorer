@@ -1,5 +1,5 @@
 class User
   include ActiveModel::Model
 
-  attr_accessor :name, :spotify_id, :product, :image, :email, :country
+  attr_accessor :name, :image
 end
