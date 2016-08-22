@@ -35,7 +35,6 @@ class SpotifyController < ApplicationController
     authorization = Base64.strict_encode64("#{@@client_id}:#{@@secret}")
 
     state = request.query_parameters['state']
-
     saved_state = params['state']
 
     unless state.eql? saved_state
