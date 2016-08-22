@@ -68,7 +68,7 @@ class SpotifyController < ApplicationController
       @top_tracks = Spotify.get_top_tracks(session[:access_token])
 
     rescue Exception => e
-      puts "exception #{e}"
+      logger.error "Error loading the board: #{e.message}"
       redirect_to "/spotify"
       return
     end
