@@ -8,28 +8,30 @@ module Spotify
     'user-read-private',
     'user-top-read']
 
-  ME_API_URL = 'https://api.spotify.com/v1/me'
-  TOP_TRACKS_ENDPOINT = ME_API_URL + "/top/tracks"
-  TOP_ARTISTS_ENDPOINT = ME_API_URL + "/top/artists"
-  FOLLOWED_ARTISTS = ME_API_URL + "/following?type=artist"
+  @me_api_url = 'https://api.spotify.com/v1/me'
+  @endpoints = {
+    :top_tracks => @me_api_url + '/top/tracks',
+    :top_artists => @me_api_url + '/top/artists',
+    :followed_artists => @me_api_url + '/following?type=artist'
+  }
 
   def self.get_user(auth_token)
-    response = get(ME_API_URL, auth_token)
+    response = get(@me_api_url, auth_token)
     parse_user(JSON.parse(response.body))
   end
 
   def self.get_top_tracks(auth_token)
-    response = get(TOP_TRACKS_ENDPOINT, auth_token)
+    response = get(@endpoints[:top_tracks], auth_token)
     parse_tracks_list(JSON.parse(response.body))
   end
 
   def self.get_top_artists(auth_token)
-    response = get(TOP_ARTISTS_ENDPOINT, auth_token)
+    response = get(@endpoints[:top_artists], auth_token)
     parse_artists_list(JSON.parse(response.body))
   end
 
   def self.get_followed_artists(auth_token)
-    response = get(FOLLOWED_ARTISTS, auth_token)
+    response = get(@endpoints[:followed_artists], auth_token)
     parse_artists_list(JSON.parse(response.body)['artists'])
   end
 
