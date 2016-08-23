@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get '/spotify/login', to: 'spotify#login_user'
   get '/spotify/dashboard', to: 'spotify#dashboard'
   get '/spotify/auth', to: 'spotify#authorize_finish'
+
+  root to: 'spotify#index'
 end
