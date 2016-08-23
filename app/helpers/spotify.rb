@@ -38,7 +38,7 @@ module Spotify
   def self.parse_user (spotify_user)
     User.new(
       name: spotify_user['display_name'],
-      image: spotify_user['images']&.first['url'])
+      image: spotify_user.dig('images', 0, 'url'))
   end
 
   def self.parse_artists_list (spotify_artists_list)
@@ -52,7 +52,7 @@ module Spotify
       name: spotify_artist['name'],
       spotify_id: spotify_artist['id'],
       genre: spotify_artist['genre'],
-      image: spotify_artist['images']&.first['url'],
+      image: spotify_artist.dig('images', 0, 'url'),
       popularity: spotify_artist['popularity'],
       followers_qty: spotify_artist['followers']['total'])
   end
