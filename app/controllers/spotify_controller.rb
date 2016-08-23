@@ -38,6 +38,8 @@ class SpotifyController < ApplicationController
     saved_state = params['state']
 
     unless state.eql? saved_state
+      puts "********** authorize_finish states wont match #{e.message}"
+
       redirect_to '/spotify/', :flash => { :error => "Spotify Authorization failed" }
       return
     end
@@ -53,6 +55,7 @@ class SpotifyController < ApplicationController
       session[:refresh_token] = JSON.parse(response.body)['refresh_token']
 
     rescue Exception => e
+      puts "********** authorize_finish token auth failed #{e.message}"
       redirect_to "/spotify"
       return
     end
@@ -68,6 +71,9 @@ class SpotifyController < ApplicationController
       @top_tracks = Spotify.get_top_tracks(session[:access_token])
 
     rescue Exception => e
+
+      puts "********** dashboard #{e.message}"
+
       logger.error "Error loading the board: #{e.message}"
       redirect_to "/spotify"
       return
@@ -82,6 +88,8 @@ class SpotifyController < ApplicationController
     begin
       @user = Spotify.get_user(session[:access_token])
     rescue Exception => e
+      puts "********** set_user failed #{e.message}"
+
       redirect_to "/spotify"
       return
     end
