@@ -84,7 +84,7 @@ class SpotifyController < ApplicationController
     begin
       @user = Spotify.get_user(session[:access_token])
     rescue Exception => e
-      logger.error "Error getting user info from Spotify: #{e.message}"
+      logger.error "Error getting user info from Spotify: #{e.backtrace.join("\n")}"
       redirect_to "/spotify"
       return
     end
