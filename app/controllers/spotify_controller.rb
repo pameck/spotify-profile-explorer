@@ -19,15 +19,9 @@ class SpotifyController < ApplicationController
   def login_user
     @spotify_random = SecureRandom.hex
 
-    query_params = URI.encode_www_form({
-      :client_id => @@client_id,
-      :response_type => 'code',
-      :redirect_uri => @@redirect_url,
-      :scope => Spotify::REQUIRED_SCOPES.join(' '),
-      :state => @spotify_random
-    })
-
-    redirect_to("https://accounts.spotify.com/authorize/?#{query_params}")
+    # move this out of here, dependency injection, how is it done? I need a singleton for this!
+    @new_spotify = SpotifyClient.new(@@client_id, @@secret)
+    redirect_to(@new_spotify.get_user_login_url(Spotify::REQUIRED_SCOPES.join(' '), @@redirect_url, @spotify_random))
   end
 
   def authorize_finish
