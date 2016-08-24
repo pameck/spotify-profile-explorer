@@ -15,7 +15,7 @@ class SpotifyClient
       :client_id => @client_id,
       :response_type => 'code',
       :redirect_uri => redirect_to,
-      :scope => scopes,
+      :scope => scopes.join(' '),
       :state =>random_check
     })
 

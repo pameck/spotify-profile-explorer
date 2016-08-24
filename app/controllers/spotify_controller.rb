@@ -21,7 +21,7 @@ class SpotifyController < ApplicationController
 
     # move this out of here, dependency injection, how is it done? I need a singleton for this!
     @new_spotify = SpotifyClient.new(@@client_id, @@secret)
-    redirect_to(@new_spotify.get_user_login_url(Spotify::REQUIRED_SCOPES.join(' '), @@redirect_url, @spotify_random))
+    redirect_to(@new_spotify.get_user_login_url(Spotify::REQUIRED_SCOPES, @@redirect_url, @spotify_random))
   end
 
   def authorize_finish
