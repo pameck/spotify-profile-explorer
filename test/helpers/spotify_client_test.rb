@@ -32,11 +32,17 @@ class SpotifyClientTest < ActiveSupport::TestCase
     end
 
     it 'should throw an error when the env var SPOTIFY_CLIENT_ID not set' do
-      assert true
+      err = assert_raises ArgumentError do
+        SpotifyClient.new(nil, 'secret')
+      end
+      assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end
 
     it 'should throw an error when the env var SPOTIFY_SECRET not set' do
-      assert true
+      err = assert_raises ArgumentError do
+        SpotifyClient.new('client', nil)
+      end
+      assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end
 
   end

@@ -5,6 +5,10 @@ class SpotifyClient
   @secret = nil
 
   def initialize(client_id, secret)
+    if !(client_id && secret)
+      raise ArgumentError, 'Spotify Client Id and Spotify secret are mandatory'
+    end
+
     @client_id = client_id
     @secret = secret
   end
