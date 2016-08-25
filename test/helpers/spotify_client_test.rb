@@ -4,7 +4,7 @@ class SpotifyClientTest < ActiveSupport::TestCase
 
   describe 'Spotify' do
     before do
-      @spotify = SpotifyClient.new({secret: 'SOMETHING', client_id: 'SOMETHING ELSE'})
+      @spotify = SpotifyClient.new({secret: 'SOMETHING', client_id: 'SOME_CLIENT_ID'})
     end
 
     describe 'get_user_login_url' do

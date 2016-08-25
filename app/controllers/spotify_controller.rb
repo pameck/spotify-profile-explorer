@@ -20,7 +20,7 @@ class SpotifyController < ApplicationController
     @spotify_random = SecureRandom.hex
 
     # move this out of here, dependency injection, how is it done? I need a singleton for this!
-    @new_spotify = SpotifyClient.new(@@client_id, @@secret)
+    @new_spotify = SpotifyClient.new({secret: @@client_id, client_id: @@secret})
     redirect_to(@new_spotify.get_user_login_url(Spotify::REQUIRED_SCOPES, @@redirect_url, @spotify_random))
   end
 
