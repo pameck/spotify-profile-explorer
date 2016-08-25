@@ -34,13 +34,41 @@ class SpotifyClientTest < ActiveSupport::TestCase
     describe 'authorize' do
 
       it 'should return a spotify session for a valid request' do
+        stub_request(:post, 'https://accounts.spotify.com/api/token')
+        .with(
+          body: hash_including({
+            grant_type: 'authorization_code',
+            code: 'super_auth_code',
+            redirect_uri: 'http://somewebsite.com/callback'
+          }), headers: { Authorization: "Basic #{Base64.strict_encode64("SOME_CLIENT_ID:SOMETHING")}" })
+        .to_return(body: '{"access_token": "token1", "refresh_token": "refresh1"}', status: 200)
+
+        spotify_session = @spotify.authorize('super_auth_code', 'http://somewebsite.com/callback', 'random 1', 'random 1')
+
+        expect(spotify_session).wont_be_nil
+        expect(spotify_session.access_token).must_equal 'token1'
+        expect(spotify_session.refresh_token).must_equal 'refresh1'
       end
 
       it 'should not raise error if random values not defined' do
-        spotify_session = @spotify.authorize('code', 'redirect here', nil, nil)
+        stub_request(:post, 'https://accounts.spotify.com/api/token')
+        .to_return(body: '{"access_token": "token1", "refresh_token": "refresh1"}', status: 200)
+
+        spotify_session = @spotify.authorize('super_auth_code', 'http://somewebsite.com/callback', nil, nil)
+
+        expect(spotify_session).wont_be_nil
+        expect(spotify_session.access_token).must_equal 'token1'
+        expect(spotify_session.refresh_token).must_equal 'refresh1'
       end
 
       it 'should raise an error for an invalid request' do
+        stub_request(:post, 'https://accounts.spotify.com/api/token')
+        .to_return(status: 400)
+
+        err = assert_raises SecurityError do
+          spotify_session = @spotify.authorize('code', 'redirect here', 'random 1', 'random 1')
+        end
+        assert_equal 'Authorization denied by Spotify', err.message
       end
 
       it 'should raise an error when the random values sent and returned do not match' do

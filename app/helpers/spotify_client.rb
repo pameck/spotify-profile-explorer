@@ -21,37 +21,37 @@ class SpotifyClient
       :state =>random_check
     })
 
-    "https://accounts.spotify.com/authorize/?#{query_params}"
+    "https://accounts.spotify.com/authorize?#{query_params}"
   end
 
   def authorize(spotify_auth_code, redirect_to, random_value_sent=nil, random_value_returned=nil)
 
     unless random_value_sent.eql? random_value_returned
-
       #how do I inject the logger to this class?
       # logger.error "The state sent with the authorization request: #{random_value_sent} does not match the one returned by Spotify #{random_value_returned}"
       raise SecurityError, 'Seems the request has been tempered with, the state values do not match'
     end
 
-    nil
+    begin
+      response = RestClient.post('https://accounts.spotify.com/api/token', {
+        grant_type: 'authorization_code',
+        code: spotify_auth_code,
+        redirect_uri: redirect_to
+      }, {:Authorization => "Basic #{get_authorization_header}"})
 
-    # begin
-    #   response = RestClient.post('https://accounts.spotify.com/api/token', {
-    #     grant_type: 'authorization_code',
-    #     code: spotify_auth_code,
-    #     redirect_uri: redirect_to
-    #   }, {:Authorization => "Basic #{authorization_code}"})
+      return SpotifySession.new({
+          refresh_token: JSON.parse(response.body)['refresh_token'],
+          access_token: JSON.parse(response.body)['access_token']
+        })
 
-    # rescue Exception => e
-    #   logger.error "Error getting the token from Spotify: #{e.message}"
-    #   redirect_to "/spotify"
-    #   return
-    # end
-
+    rescue Exception => e
+      # logger.error "Error getting the token from Spotify: #{e.message}"
+      raise SecurityError, 'Authorization denied by Spotify'
+    end
   end
 
   private
-    def authorization_code
+    def get_authorization_header
       Base64.strict_encode64("#{@client_id}:#{@secret}")
     end
 end
