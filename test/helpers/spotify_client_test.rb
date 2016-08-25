@@ -31,6 +31,26 @@ class SpotifyClientTest < ActiveSupport::TestCase
       end
     end
 
+    describe 'authorize' do
+
+      it 'should return a spotify session for a valid request' do
+      end
+
+      it 'should not raise error if random values not defined' do
+        spotify_session = @spotify.authorize('code', 'redirect here', nil, nil)
+      end
+
+      it 'should raise an error for an invalid request' do
+      end
+
+      it 'should raise an error when the random values sent and returned do not match' do
+        err = assert_raises SecurityError do
+          spotify_session = @spotify.authorize('code', 'redirect here', 'random 1', 'random 2')
+        end
+        assert_equal 'Seems the request has been tempered with, the state values do not match', err.message
+      end
+    end
+
     it 'should throw an error when the env var SPOTIFY_CLIENT_ID not set' do
       err = assert_raises ArgumentError do
         SpotifyClient.new({secret: 'SOME SPOTIFY_SECRET'})
@@ -44,7 +64,6 @@ class SpotifyClientTest < ActiveSupport::TestCase
       end
       assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end
-
   end
 
 end
