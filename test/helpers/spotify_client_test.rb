@@ -4,7 +4,7 @@ class SpotifyClientTest < ActiveSupport::TestCase
 
   describe 'Spotify' do
     before do
-      @spotify = SpotifyClient.new({secret: 'SOMETHING', client_id: 'SOME_CLIENT_ID'})
+      @spotify = SpotifyClient.new(secret: 'SOMETHING', client_id: 'SOME_CLIENT_ID')
     end
 
     describe 'get_user_login_url' do
@@ -81,14 +81,14 @@ class SpotifyClientTest < ActiveSupport::TestCase
 
     it 'should throw an error when the env var SPOTIFY_CLIENT_ID not set' do
       err = assert_raises ArgumentError do
-        SpotifyClient.new({secret: 'SOME SPOTIFY_SECRET'})
+        SpotifyClient.new(secret: 'SOMETHING', client_id: nil)
       end
       assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end
 
     it 'should throw an error when the env var SPOTIFY_SECRET not set' do
       err = assert_raises ArgumentError do
-        SpotifyClient.new({client_id: 'SOME SPOTIFY_CLIENT_ID'})
+        SpotifyClient.new(secret: nil, client_id: 'SOME_CLIENT_ID')
       end
       assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end

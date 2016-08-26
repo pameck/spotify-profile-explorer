@@ -1,9 +1,10 @@
 #This should be a Singleton, injected in controllers, how do I do that?
 class SpotifyClient
 
-  def initialize(args)
-    @client_id = args[:client_id]
-    @secret = args[:secret]
+
+  def initialize(client_id:, secret:)
+    @client_id = client_id
+    @secret = secret
 
     if !(@client_id && @secret)
       raise ArgumentError, 'Spotify Client Id and Spotify secret are mandatory'
