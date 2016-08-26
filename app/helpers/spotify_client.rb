@@ -1,10 +1,19 @@
 #This should be a Singleton, injected in controllers, how do I do that?
 class SpotifyClient
 
+  attr_reader :scope
 
-  def initialize(client_id:, secret:)
+  @@all_scopes = ['playlist-read-private',
+    'playlist-read-collaborative',
+    'user-follow-read',
+    'user-library-read',
+    'user-read-private',
+    'user-top-read']
+
+  def initialize(client_id:, secret:, scope: @@all_scopes)
     @client_id = client_id
     @secret = secret
+    @scope = scope
 
     if !(@client_id && @secret)
       raise ArgumentError, 'Spotify Client Id and Spotify secret are mandatory'
@@ -12,13 +21,13 @@ class SpotifyClient
 
   end
 
-  def get_user_login_url(scopes, redirect_to, random_check)
+  def get_user_login_url(redirect_to, random_check)
 
     query_params = URI.encode_www_form({
       :client_id => @client_id,
       :response_type => 'code',
       :redirect_uri => redirect_to,
-      :scope => scopes.join(' '),
+      :scope => @scope.join(' '),
       :state =>random_check
     })
 

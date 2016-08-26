@@ -1,6 +1,6 @@
 module Spotify
 
-  REQUIRED_SCOPES = ['user-follow-read', 'user-top-read']
+  REQUIRED_SCOPE = ['user-follow-read', 'user-top-read']
   ALL_SCOPES = ['playlist-read-private',
     'playlist-read-collaborative',
     'user-follow-read',

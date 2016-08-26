@@ -4,12 +4,12 @@ class SpotifyClientTest < ActiveSupport::TestCase
 
   describe 'Spotify' do
     before do
-      @spotify = SpotifyClient.new(secret: 'SOMETHING', client_id: 'SOME_CLIENT_ID')
+      @spotify = SpotifyClient.new(secret: 'SOMETHING', client_id: 'SOME_CLIENT_ID', scope: ['a-1', 'b-2'])
     end
 
     describe 'get_user_login_url' do
       before do
-        @url = @spotify.get_user_login_url(['a-1', 'b-2'], 'http://localhost:444/crazy/callback', 'this_is_super_random')
+        @url = @spotify.get_user_login_url('http://localhost:444/crazy/callback', 'this_is_super_random')
       end
 
       it 'should return the url to redirect the user to provide their creds' do
@@ -79,16 +79,21 @@ class SpotifyClientTest < ActiveSupport::TestCase
       end
     end
 
+    it 'should default to all scopes when scope not defined' do
+      client = SpotifyClient.new(secret: 'SOME_SECRET', client_id: 'SOME_CLIENT_ID')
+      expect(client.scope).wont_be_empty
+    end
+
     it 'should throw an error when the env var SPOTIFY_CLIENT_ID not set' do
       err = assert_raises ArgumentError do
-        SpotifyClient.new(secret: 'SOMETHING', client_id: nil)
+        SpotifyClient.new(secret: 'SOMETHING', client_id: nil, scope: Spotify::REQUIRED_SCOPE)
       end
       assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end
 
     it 'should throw an error when the env var SPOTIFY_SECRET not set' do
       err = assert_raises ArgumentError do
-        SpotifyClient.new(secret: nil, client_id: 'SOME_CLIENT_ID')
+        SpotifyClient.new(secret: nil, client_id: 'SOME_CLIENT_ID', scope: Spotify::REQUIRED_SCOPE)
       end
       assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end
