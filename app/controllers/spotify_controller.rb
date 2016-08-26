@@ -22,18 +22,17 @@ class SpotifyController < ApplicationController
     session[:spotify_random] = spotify_random
 
     # move this out of here, dependency injection, how is it done? I need a singleton for this!
-    new_spotify = SpotifyClient.new({secret: @@secret, client_id: @@client_id})
-    redirect_to(new_spotify.get_user_login_url(Spotify::REQUIRED_SCOPES, @@redirect_url, spotify_random))
+    spotify_client = SpotifyClient.new({secret: @@secret, client_id: @@client_id})
+    redirect_to(spotify_client.get_user_login_url(Spotify::REQUIRED_SCOPES, @@redirect_url, spotify_random))
   end
 
   def authorize_finish
     begin
       # move this out of here, dependency injection, how is it done? I need a singleton for this!
-      new_spotify = SpotifyClient.new({secret: @@secret, client_id: @@client_id})
-      spotify_session = new_spotify.authorize(params['code'], @@redirect_url, session[:spotify_random], params['state'])
+      spotify_client = SpotifyClient.new({secret: @@secret, client_id: @@client_id})
+      spotify_session = spotify_client.authorize(params['code'], @@redirect_url, session[:spotify_random], params['state'])
 
-      session[:access_token] = spotify_session.access_token
-      session[:refresh_token] = spotify_session.refresh_token
+      session[:spotify_session] = spotify_session
 
     rescue Exception => e
       logger.error "Error getting the token from Spotify: #{e.message}"
@@ -45,11 +44,11 @@ class SpotifyController < ApplicationController
   end
 
   def dashboard
+    access_token = session[:spotify_session].access_token
     begin
-
-      @following = Spotify.get_followed_artists(session[:access_token]).sort_by!{ |artist| artist.name.downcase }
-      @top_artists = Spotify.get_top_artists(session[:access_token])
-      @top_tracks = Spotify.get_top_tracks(session[:access_token])
+      @following = Spotify.get_followed_artists(access_token).sort_by!{ |artist| artist.name.downcase }
+      @top_artists = Spotify.get_top_artists(access_token)
+      @top_tracks = Spotify.get_top_tracks(access_token)
 
     rescue Exception => e
       logger.error "Error loading the board: #{e.message}"
@@ -64,7 +63,7 @@ class SpotifyController < ApplicationController
 
   def set_user
     begin
-      @user = Spotify.get_user(session[:access_token])
+      @user = Spotify.get_user(session[:spotify_session].access_token)
     rescue Exception => e
       logger.error "Error getting user info from Spotify: #{e.backtrace.join("\n")}"
       redirect_to "/spotify"
