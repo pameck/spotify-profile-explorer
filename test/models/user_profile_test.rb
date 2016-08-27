@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
+class UserProfileTest < ActiveSupport::TestCase
 
   test "should create an empty user when initialized with no params" do
-    user = User.new
+    user = UserProfile.new
     assert_not_nil(user, 'user cannot be empty')
   end
 
   test "should create a populated user when initialized with data" do
-    user = User.new(
+    user = UserProfile.new(
       name: 'Fulano de Tal',
       image: 'some url')
 
