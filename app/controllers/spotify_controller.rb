@@ -30,9 +30,9 @@ class SpotifyController < ApplicationController
     begin
       # move this out of here, dependency injection, how is it done? I need a singleton for this!
       spotify_client = SpotifyClient.new(secret: @@secret, client_id: @@client_id, scope: Spotify::REQUIRED_SCOPE)
-      spotify_session = spotify_client.authorize(params['code'], @@redirect_url, session[:spotify_random], params['state'])
+      spotify_user = spotify_client.connect(params['code'], @@redirect_url, session[:spotify_random], params['state'])
 
-      session[:spotify_session] = spotify_session
+      session[:spotify_user] = spotify_user
 
     rescue Exception => e
       logger.error "Error getting the token from Spotify: #{e.message}"
@@ -44,7 +44,7 @@ class SpotifyController < ApplicationController
   end
 
   def dashboard
-    access_token = session[:spotify_session]['access_token']
+    access_token = session[:spotify_user]['temporary_access_to_the_token_while_refactoring']
     begin
       @following = Spotify.get_followed_artists(access_token).sort_by!{ |artist| artist.name.downcase }
       @top_artists = Spotify.get_top_artists(access_token)
@@ -63,7 +63,7 @@ class SpotifyController < ApplicationController
 
   def set_user
     begin
-      @user = Spotify.get_user(session[:spotify_session]['access_token'])
+      @user = Spotify.get_user(session[:spotify_user]['temporary_access_to_the_token_while_refactoring'])
     rescue Exception => e
       logger.error "Error getting user info from Spotify: #{e.backtrace.join("\n")}"
       redirect_to "/spotify"

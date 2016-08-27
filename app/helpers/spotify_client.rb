@@ -34,7 +34,7 @@ class SpotifyClient
     "https://accounts.spotify.com/authorize?#{query_params}"
   end
 
-  def authorize(spotify_auth_code, redirect_to, random_value_sent=nil, random_value_returned=nil)
+  def connect(spotify_auth_code, redirect_to, random_value_sent=nil, random_value_returned=nil)
 
     unless random_value_sent.eql? random_value_returned
       #how do I inject the logger to this class?
@@ -49,7 +49,7 @@ class SpotifyClient
         redirect_uri: redirect_to
       }, {:Authorization => "Basic #{get_authorization_header}"})
 
-      return SpotifySession.new({
+      return SpotifyConnectedUser.new({
           refresh_token: JSON.parse(response.body)['refresh_token'],
           access_token: JSON.parse(response.body)['access_token']
         })

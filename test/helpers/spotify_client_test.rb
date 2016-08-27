@@ -31,7 +31,7 @@ class SpotifyClientTest < ActiveSupport::TestCase
       end
     end
 
-    describe 'authorize' do
+    describe 'connect' do
 
       it 'should return a spotify session for a valid request' do
         stub_request(:post, 'https://accounts.spotify.com/api/token')
@@ -43,22 +43,19 @@ class SpotifyClientTest < ActiveSupport::TestCase
           }), headers: { Authorization: "Basic #{Base64.strict_encode64("SOME_CLIENT_ID:SOMETHING")}" })
         .to_return(body: '{"access_token": "token1", "refresh_token": "refresh1"}', status: 200)
 
-        spotify_session = @spotify.authorize('super_auth_code', 'http://somewebsite.com/callback', 'random 1', 'random 1')
+        spotify_user = @spotify.connect('super_auth_code', 'http://somewebsite.com/callback', 'random 1', 'random 1')
 
-        expect(spotify_session).wont_be_nil
-        expect(spotify_session.access_token).must_equal 'token1'
-        expect(spotify_session.refresh_token).must_equal 'refresh1'
+        expect(spotify_user).wont_be_nil
+        expect(spotify_user).must_be_instance_of SpotifyConnectedUser
       end
 
       it 'should not raise error if random values not defined' do
         stub_request(:post, 'https://accounts.spotify.com/api/token')
         .to_return(body: '{"access_token": "token1", "refresh_token": "refresh1"}', status: 200)
 
-        spotify_session = @spotify.authorize('super_auth_code', 'http://somewebsite.com/callback', nil, nil)
+        spotify_user = @spotify.connect('super_auth_code', 'http://somewebsite.com/callback', nil, nil)
 
-        expect(spotify_session).wont_be_nil
-        expect(spotify_session.access_token).must_equal 'token1'
-        expect(spotify_session.refresh_token).must_equal 'refresh1'
+        expect(spotify_user).wont_be_nil
       end
 
       it 'should raise an error for an invalid request' do
@@ -66,14 +63,14 @@ class SpotifyClientTest < ActiveSupport::TestCase
         .to_return(status: 400)
 
         err = assert_raises SecurityError do
-          spotify_session = @spotify.authorize('code', 'redirect here', 'random 1', 'random 1')
+          spotify_user = @spotify.connect('code', 'redirect here', 'random 1', 'random 1')
         end
         assert_equal 'Authorization denied by Spotify', err.message
       end
 
       it 'should raise an error when the random values sent and returned do not match' do
         err = assert_raises SecurityError do
-          spotify_session = @spotify.authorize('code', 'redirect here', 'random 1', 'random 2')
+          spotify_user = @spotify.connect('code', 'redirect here', 'random 1', 'random 2')
         end
         assert_equal 'Seems the request has been tempered with, the state values do not match', err.message
       end
