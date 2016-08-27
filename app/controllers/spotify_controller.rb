@@ -44,7 +44,7 @@ class SpotifyController < ApplicationController
   end
 
   def dashboard
-    access_token = session[:spotify_user]['temporary_access_to_the_token_while_refactoring']
+    access_token = session[:spotify_user]['access_token']
     begin
       @following = Spotify.get_followed_artists(access_token).sort_by!{ |artist| artist.name.downcase }
       @top_artists = Spotify.get_top_artists(access_token)
@@ -62,8 +62,12 @@ class SpotifyController < ApplicationController
   private
 
   def set_user
+    spotify_user = session[:spotify_user]
     begin
-      @user = Spotify.get_user(session[:spotify_user]['temporary_access_to_the_token_while_refactoring'])
+      @user = SpotifyConnectedUser.new(
+        access_token: spotify_user['access_token'],
+        refresh_token: spotify_user['refresh_token']
+      ).get_profile
     rescue Exception => e
       logger.error "Error getting user info from Spotify: #{e.backtrace.join("\n")}"
       redirect_to "/spotify"
