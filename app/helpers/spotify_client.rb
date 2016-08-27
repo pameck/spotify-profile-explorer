@@ -51,7 +51,8 @@ class SpotifyClient
 
       return SpotifyConnectedUser.new({
           refresh_token: JSON.parse(response.body)['refresh_token'],
-          access_token: JSON.parse(response.body)['access_token']
+          access_token: JSON.parse(response.body)['access_token'],
+          auth_header: get_authorization_header
         })
 
     rescue Exception => e
