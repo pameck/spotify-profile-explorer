@@ -45,10 +45,16 @@ class SpotifyController < ApplicationController
 
   def dashboard
     access_token = session[:spotify_user]['access_token']
+
+    spotify_user = SpotifyConnectedUser.new(
+      access_token: session[:spotify_user]['access_token'],
+      refresh_token: session[:spotify_user]['refresh_token']
+    )
+
     begin
+      @top_tracks = spotify_user.get_top_tracks
       @following = Spotify.get_followed_artists(access_token).sort_by!{ |artist| artist.name.downcase }
       @top_artists = Spotify.get_top_artists(access_token)
-      @top_tracks = Spotify.get_top_tracks(access_token)
 
     rescue Exception => e
       logger.error "Error loading the board: #{e.message}"
