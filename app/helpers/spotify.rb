@@ -15,11 +15,6 @@ module Spotify
     :followed_artists => @me_api_url + '/following?type=artist'
   }
 
-  def self.get_user(auth_token)
-    response = get(@me_api_url, auth_token)
-    parse_user(JSON.parse(response.body))
-  end
-
   def self.get_top_tracks(auth_token)
     response = get(@endpoints[:top_tracks], auth_token)
     parse_tracks_list(JSON.parse(response.body))
@@ -33,12 +28,6 @@ module Spotify
   def self.get_followed_artists(auth_token)
     response = get(@endpoints[:followed_artists], auth_token)
     parse_artists_list(JSON.parse(response.body)['artists'])
-  end
-
-  def self.parse_user (spotify_user)
-    User.new(
-      name: spotify_user['display_name'],
-      image: spotify_user.dig('images', 0, 'url'))
   end
 
   def self.parse_artists_list (spotify_artists_list)
