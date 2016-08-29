@@ -17,7 +17,12 @@ class SpotifyConnectedUser
   end
 
   def get_profile
-    response = RestClient.get(ME_API_URL, {:Authorization => "Bearer #{@access_token}"})
+    begin
+      response = RestClient.get(ME_API_URL, {:Authorization => "Bearer #{@access_token}"})
+    rescue Exception => e
+      raise SecurityError, 'Error accessing the user profile in Spotify'
+    end
+
     parse_user(JSON.parse(response.body))
   end
 

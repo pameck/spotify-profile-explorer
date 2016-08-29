@@ -69,7 +69,6 @@ class SpotifyController < ApplicationController
         refresh_token: spotify_user['refresh_token']
       ).get_profile
     rescue Exception => e
-      logger.error "Error getting user info from Spotify: #{e.backtrace.join("\n")}"
       redirect_to "/spotify"
       return
     end

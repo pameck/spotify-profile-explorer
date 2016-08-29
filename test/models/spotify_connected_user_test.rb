@@ -19,6 +19,17 @@ class SpotifyConnectedUserTest < ActiveSupport::TestCase
       expect(profile_info.name).must_equal 'Lilu Dallas'
       expect(profile_info.image).must_equal 'https://images.spotify.com/liludallas'
     end
+
+    it 'should raise error when Spotify access token not set' do
+      stub_request(:get, 'https://api.spotify.com/v1/me')
+      .to_return(status: 400)
+
+      err = assert_raises SecurityError do
+        @connected_user.get_profile
+      end
+      expect(err.message).must_equal 'Error accessing the user profile in Spotify'
+    end
+
   end
 
   it 'should raise error when Spotify access token not set' do
