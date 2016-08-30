@@ -10,7 +10,7 @@ This is a Web application that will let you find things about your Spotify profi
 ### Register your App in Spotify
 0. Go to [Spotify Dev Website](https://developer.spotify.com/my-applications/#!/applications) and create an application.
 
-0. Create `config/application.yml` and set the values for the following variables. (check `config/application.yml.example`). **Keep your application.yml private, do not commit it.**
+0. Create your own `config/application.yml` and set the values for the following variables. (check `config/application.yml.example`). **Keep your application.yml private, do not commit it.**
 
 ```
 SPOTIFY_CLIENT_ID: "The one given by Spotify when you created your app"
@@ -35,7 +35,7 @@ _Requires docker, docker-machine and docker-compose_
 
 ### Build the application (from inside the application folder)
 
-`docker-compose build`
+`cd spotify-profile-explorer && docker-compose build`
 
 ### Run the application
 
