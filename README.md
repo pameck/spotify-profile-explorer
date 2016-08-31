@@ -18,10 +18,10 @@ SPOTIFY_SECRET: "The one given by Spotify when you created your app"
 SPOTIFY_REDIRECT_URL: "The one you set on Redirect URIs when you created your app"
 ```
 
-### Install with Docker (Tuned for OSX)
-_Requires docker, docker-machine and docker-compose_
+### Install with Docker (Instructions for OSX)
+_Requires docker-machine and docker-compose_
 
-0. Install VirtualBox with brew cask <br>
+0. Install VirtualBox, I did it with [Brew Cask](https://caskroom.github.io/) <br>
 `brew cask install viritualbox`
 
 0. Install Docker ToolBox (installs docker, docker-machine and docker-compose) <br>
