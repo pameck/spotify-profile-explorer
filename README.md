@@ -41,6 +41,8 @@ _Requires docker-machine and docker-compose_
 
 `docker-compose up`
 
+_add --build in case you made changes to the code_
+
 ### Run the tests
 
 `docker-compose run web rake test`
