@@ -29,7 +29,6 @@ class SpotifyConnectedUserTest < ActiveSupport::TestCase
       end
       expect(err.message).must_equal 'Error accessing the user profile in Spotify'
     end
-
   end
 
   describe 'get_top_tracks' do

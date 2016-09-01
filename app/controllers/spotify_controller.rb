@@ -5,7 +5,6 @@ require 'base64'
 class SpotifyController < ApplicationController
 
   protect_from_forgery with: :exception
-  before_action :set_user, only: [:dashboard]
 
   @@secret = ENV['SPOTIFY_SECRET']
   @@client_id = ENV['SPOTIFY_CLIENT_ID']
@@ -43,14 +42,13 @@ class SpotifyController < ApplicationController
   end
 
   def dashboard
-    access_token = session[:spotify_user]['access_token']
-
-    spotify_user = SpotifyConnectedUser.new(
-      access_token: session[:spotify_user]['access_token'],
-      refresh_token: session[:spotify_user]['refresh_token']
-    )
-
     begin
+      spotify_user = SpotifyConnectedUser.new(
+        access_token: session[:spotify_user]['access_token'],
+        refresh_token: session[:spotify_user]['refresh_token']
+      )
+
+      @user = spotify_user.get_profile
       @top_tracks = spotify_user.get_top_tracks
       @top_artists = spotify_user.get_top_artists
       @following = spotify_user.get_followed_artists.sort_by!{ |artist| artist.name.downcase }
@@ -63,20 +61,4 @@ class SpotifyController < ApplicationController
 
     render "dashboard"
   end
-
-  private
-
-  def set_user
-    spotify_user = session[:spotify_user]
-    begin
-      @user = SpotifyConnectedUser.new(
-        access_token: spotify_user['access_token'],
-        refresh_token: spotify_user['refresh_token']
-      ).get_profile
-    rescue Exception => e
-      redirect_to "/spotify"
-      return
-    end
-  end
-
 end
