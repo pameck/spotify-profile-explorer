@@ -1,7 +1,6 @@
 require 'rest-client'
 require 'uri'
 require 'base64'
-require 'spotify'
 
 class SpotifyController < ApplicationController
 
@@ -53,8 +52,8 @@ class SpotifyController < ApplicationController
 
     begin
       @top_tracks = spotify_user.get_top_tracks
-      @following = Spotify.get_followed_artists(access_token).sort_by!{ |artist| artist.name.downcase }
-      @top_artists = Spotify.get_top_artists(access_token)
+      @top_artists = spotify_user.get_top_artists
+      @following = spotify_user.get_followed_artists.sort_by!{ |artist| artist.name.downcase }
 
     rescue Exception => e
       logger.error "Error loading the board: #{e.message}"

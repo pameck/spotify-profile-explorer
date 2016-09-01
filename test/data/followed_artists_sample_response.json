@@ -1,0 +1,316 @@
+{
+  "artists" : {
+    "items" : [ {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 4609545
+      },
+      "genres" : [ "pop" ],
+      "href" : "https://api.spotify.com/v1/artists/0du5cEVh5yTK9QJze8zA0C",
+      "id" : "0du5cEVh5yTK9QJze8zA0C",
+      "images" : [ {
+        "height" : 500,
+        "url" : "https://i.scdn.co/image/f22774ca7d636e724164a65b2601ab39538a3aed",
+        "width" : 500
+      }, {
+        "height" : 200,
+        "url" : "https://i.scdn.co/image/55e754245c9e3a2a2521abf04e558783a3e394e5",
+        "width" : 200
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/9601409c7787d9eee9481a54c661ed3bd0e7f79c",
+        "width" : 64
+      } ],
+      "name" : "Bruno Mars",
+      "popularity" : 83,
+      "type" : "artist",
+      "uri" : "spotify:artist:0du5cEVh5yTK9QJze8zA0C"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/0id62QV2SZZfvBn9xpmuCl"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 303284
+      },
+      "genres" : [ ],
+      "href" : "https://api.spotify.com/v1/artists/0id62QV2SZZfvBn9xpmuCl",
+      "id" : "0id62QV2SZZfvBn9xpmuCl",
+      "images" : [ {
+        "height" : 1333,
+        "url" : "https://i.scdn.co/image/54c5dde7591a0a8033b3cf3ec36648688dd9a10e",
+        "width" : 1000
+      }, {
+        "height" : 853,
+        "url" : "https://i.scdn.co/image/3dd43d922ef6bd682e72b4699c6411fd2a131fe2",
+        "width" : 640
+      }, {
+        "height" : 267,
+        "url" : "https://i.scdn.co/image/19a2009ef49ef0f7f7c5762feef136be13a886e3",
+        "width" : 200
+      }, {
+        "height" : 85,
+        "url" : "https://i.scdn.co/image/bc2859eda6738be01b9da89d038ff43c41d6851f",
+        "width" : 64
+      } ],
+      "name" : "Aloe Blacc",
+      "popularity" : 68,
+      "type" : "artist",
+      "uri" : "spotify:artist:0id62QV2SZZfvBn9xpmuCl"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 1783380
+      },
+      "genres" : [ "art rock" ],
+      "href" : "https://api.spotify.com/v1/artists/0k17h0D3J5VfsdmQ1iZtE9",
+      "id" : "0k17h0D3J5VfsdmQ1iZtE9",
+      "images" : [ {
+        "height" : 977,
+        "url" : "https://i.scdn.co/image/e69f71e2be4b67b82af90fb8e9d805715e0684fa",
+        "width" : 1000
+      }, {
+        "height" : 625,
+        "url" : "https://i.scdn.co/image/d011c95081cd9a329e506abd7ded47535d524a07",
+        "width" : 640
+      }, {
+        "height" : 195,
+        "url" : "https://i.scdn.co/image/f0a39a8a196a87a7236bdcf8a8708f6d5d3547cc",
+        "width" : 200
+      }, {
+        "height" : 63,
+        "url" : "https://i.scdn.co/image/ec1fb7127168dbaa962404031409c5a293b95ec6",
+        "width" : 64
+      } ],
+      "name" : "Pink Floyd",
+      "popularity" : 79,
+      "type" : "artist",
+      "uri" : "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/10exVja0key0uqUkk6LJRT"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 523770
+      },
+      "genres" : [ ],
+      "href" : "https://api.spotify.com/v1/artists/10exVja0key0uqUkk6LJRT",
+      "id" : "10exVja0key0uqUkk6LJRT",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/09f8085b30ded8000e59820d02f67139c5c24a49",
+        "width" : 640
+      }, {
+        "height" : 320,
+        "url" : "https://i.scdn.co/image/0384f613228b092c1a19df2b25022bacf5333da9",
+        "width" : 320
+      }, {
+        "height" : 160,
+        "url" : "https://i.scdn.co/image/9831a4946cf2ce2eefe61091c728e526901e975c",
+        "width" : 160
+      } ],
+      "name" : "Vance Joy",
+      "popularity" : 75,
+      "type" : "artist",
+      "uri" : "spotify:artist:10exVja0key0uqUkk6LJRT"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/12Chz98pHFMPJEknJQMWvI"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 2247216
+      },
+      "genres" : [ ],
+      "href" : "https://api.spotify.com/v1/artists/12Chz98pHFMPJEknJQMWvI",
+      "id" : "12Chz98pHFMPJEknJQMWvI",
+      "images" : [ {
+        "height" : 667,
+        "url" : "https://i.scdn.co/image/0b3c04473aa6a2db8235e5092ec3413f35752b8d",
+        "width" : 1000
+      }, {
+        "height" : 427,
+        "url" : "https://i.scdn.co/image/cf54c2d4a4549fb484862a9c475fc897bb5ce707",
+        "width" : 640
+      }, {
+        "height" : 133,
+        "url" : "https://i.scdn.co/image/837c977024362a7f6d1873027e2a8664e21f911a",
+        "width" : 200
+      }, {
+        "height" : 43,
+        "url" : "https://i.scdn.co/image/0b14ff7b9c9fcfaf6b662fe439576c531b0aa8d8",
+        "width" : 64
+      } ],
+      "name" : "Muse",
+      "popularity" : 77,
+      "type" : "artist",
+      "uri" : "spotify:artist:12Chz98pHFMPJEknJQMWvI"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/13ccXrK7AmXb4TddMkE7jy"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 69092
+      },
+      "genres" : [ ],
+      "href" : "https://api.spotify.com/v1/artists/13ccXrK7AmXb4TddMkE7jy",
+      "id" : "13ccXrK7AmXb4TddMkE7jy",
+      "images" : [ {
+        "height" : 1249,
+        "url" : "https://i.scdn.co/image/af4afd03ea0763024da0b5ddf696b55f17ae4fdd",
+        "width" : 1000
+      }, {
+        "height" : 800,
+        "url" : "https://i.scdn.co/image/342449d67f0e52898f245bbc7a76958573cd9d5e",
+        "width" : 640
+      }, {
+        "height" : 250,
+        "url" : "https://i.scdn.co/image/fab91773429ccf5572a261783bd4c960a803fae2",
+        "width" : 200
+      }, {
+        "height" : 80,
+        "url" : "https://i.scdn.co/image/a9e539293331202aab346aeace3c793c1fdcf3d1",
+        "width" : 64
+      } ],
+      "name" : "Everything But The Girl",
+      "popularity" : 55,
+      "type" : "artist",
+      "uri" : "spotify:artist:13ccXrK7AmXb4TddMkE7jy"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/1Cs0zKBU1kc0i8ypK3B9ai"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 7818477
+      },
+      "genres" : [ "edm", "electro house", "house" ],
+      "href" : "https://api.spotify.com/v1/artists/1Cs0zKBU1kc0i8ypK3B9ai",
+      "id" : "1Cs0zKBU1kc0i8ypK3B9ai",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/7cb2be798b241a1c8d616a18049cea7e87721372",
+        "width" : 640
+      }, {
+        "height" : 320,
+        "url" : "https://i.scdn.co/image/c6bda823352ac3774d4ef1e9cf1cf3c955e7436b",
+        "width" : 320
+      }, {
+        "height" : 160,
+        "url" : "https://i.scdn.co/image/7396f9bf5290b13d6a08995dc1cd313a1dcb341c",
+        "width" : 160
+      } ],
+      "name" : "David Guetta",
+      "popularity" : 87,
+      "type" : "artist",
+      "uri" : "spotify:artist:1Cs0zKBU1kc0i8ypK3B9ai"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/1QOmebWGB6FdFtW7Bo3F0W"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 437676
+      },
+      "genres" : [ "argentine rock", "latin alternative", "rock en espanol" ],
+      "href" : "https://api.spotify.com/v1/artists/1QOmebWGB6FdFtW7Bo3F0W",
+      "id" : "1QOmebWGB6FdFtW7Bo3F0W",
+      "images" : [ {
+        "height" : 647,
+        "url" : "https://i.scdn.co/image/b5ac82dff61b3a4e0e84c79d7d1a3d5e57011f89",
+        "width" : 1000
+      }, {
+        "height" : 414,
+        "url" : "https://i.scdn.co/image/a5a325cb5b4cebb3404eeba0b3bb35beac0ae0ea",
+        "width" : 640
+      }, {
+        "height" : 129,
+        "url" : "https://i.scdn.co/image/6caa6c4700a605175ab67c4cf345fc99de97eba2",
+        "width" : 199
+      }, {
+        "height" : 41,
+        "url" : "https://i.scdn.co/image/a68e197137d366d1feb86e012c93c4841d83e55e",
+        "width" : 63
+      } ],
+      "name" : "Gustavo Cerati",
+      "popularity" : 70,
+      "type" : "artist",
+      "uri" : "spotify:artist:1QOmebWGB6FdFtW7Bo3F0W"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/1bZNv4q3OxYq7mmnLha7Tu"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 156183
+      },
+      "genres" : [ "argentine rock", "rock en espanol" ],
+      "href" : "https://api.spotify.com/v1/artists/1bZNv4q3OxYq7mmnLha7Tu",
+      "id" : "1bZNv4q3OxYq7mmnLha7Tu",
+      "images" : [ {
+        "height" : 637,
+        "url" : "https://i.scdn.co/image/cf679d7f8a3d8979507b8380607e3925e38c713f",
+        "width" : 640
+      }, {
+        "height" : 299,
+        "url" : "https://i.scdn.co/image/38fb9e9479234a1f7f8c0ce632ab5a94ba16bc40",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/0a10a32963196be4bcd03b18bbbed90dd78a44e8",
+        "width" : 64
+      } ],
+      "name" : "Fito Páez",
+      "popularity" : 63,
+      "type" : "artist",
+      "uri" : "spotify:artist:1bZNv4q3OxYq7mmnLha7Tu"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/1hzfo8twXdOegF3xireCYs"
+      },
+      "followers" : {
+        "href" : null,
+        "total" : 511327
+      },
+      "genres" : [ ],
+      "href" : "https://api.spotify.com/v1/artists/1hzfo8twXdOegF3xireCYs",
+      "id" : "1hzfo8twXdOegF3xireCYs",
+      "images" : [ {
+        "height" : 774,
+        "url" : "https://i.scdn.co/image/0a6f86623cf5117af4943f02d89e78e5b5f15b1d",
+        "width" : 1000
+      }, {
+        "height" : 495,
+        "url" : "https://i.scdn.co/image/32160666395637f7ec1a2b0778a5b9f681ea1874",
+        "width" : 640
+      }, {
+        "height" : 155,
+        "url" : "https://i.scdn.co/image/c8b1f09fbc2a1059f8719376a79ed1f217a07ddf",
+        "width" : 200
+      }, {
+        "height" : 50,
+        "url" : "https://i.scdn.co/image/44c9c21c47ecb612d080e65e794bbfbe50864c71",
+        "width" : 64
+      } ],
+      "name" : "Milky Chance",
+      "popularity" : 69,
+      "type" : "artist",
+      "uri" : "spotify:artist:1hzfo8twXdOegF3xireCYs"
+    } ],
+    "next" : "https://api.spotify.com/v1/me/following?type=artist&after=1hzfo8twXdOegF3xireCYs&limit=10",
+    "total" : 47,
+    "cursors" : {
+      "after" : "1hzfo8twXdOegF3xireCYs"
+    },
+    "limit" : 10,
+    "href" : "https://api.spotify.com/v1/me/following?type=artist&limit=10"
+  }
+}
