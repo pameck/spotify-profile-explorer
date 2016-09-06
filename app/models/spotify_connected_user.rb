@@ -56,6 +56,7 @@ class SpotifyConnectedUser
     parse_artists_list(JSON.parse(response.body)['artists'])
   end
 
+  #take parsers out into their own class
   private
     def parse_user (spotify_response)
       UserProfile.new(
