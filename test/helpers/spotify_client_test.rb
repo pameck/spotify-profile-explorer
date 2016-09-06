@@ -81,16 +81,16 @@ class SpotifyClientTest < ActiveSupport::TestCase
       expect(client.scope).wont_be_empty
     end
 
-    it 'should throw an error when the env var SPOTIFY_CLIENT_ID not set' do
+    it 'should throw an error when the client not set' do
       err = assert_raises ArgumentError do
-        SpotifyClient.new(secret: 'SOMETHING', client_id: nil, scope: Spotify::REQUIRED_SCOPE)
+        SpotifyClient.new(secret: 'SOMETHING', client_id: nil, scope: ['user-follow-read', 'user-top-read'])
       end
       assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end
 
-    it 'should throw an error when the env var SPOTIFY_SECRET not set' do
+    it 'should throw an error when secret not set' do
       err = assert_raises ArgumentError do
-        SpotifyClient.new(secret: nil, client_id: 'SOME_CLIENT_ID', scope: Spotify::REQUIRED_SCOPE)
+        SpotifyClient.new(secret: nil, client_id: 'SOME_CLIENT_ID')
       end
       assert_equal 'Spotify Client Id and Spotify secret are mandatory', err.message
     end

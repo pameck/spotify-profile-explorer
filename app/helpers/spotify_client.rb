@@ -11,13 +11,13 @@ class SpotifyClient
     'user-top-read']
 
   def initialize(client_id:, secret:, scope: @@all_scopes)
+    if !(client_id && secret)
+      raise ArgumentError, 'Spotify Client Id and Spotify secret are mandatory'
+    end
+
     @client_id = client_id
     @secret = secret
     @scope = scope
-
-    if !(@client_id && @secret)
-      raise ArgumentError, 'Spotify Client Id and Spotify secret are mandatory'
-    end
 
   end
 

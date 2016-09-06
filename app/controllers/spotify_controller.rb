@@ -9,6 +9,7 @@ class SpotifyController < ApplicationController
   @@secret = ENV['SPOTIFY_SECRET']
   @@client_id = ENV['SPOTIFY_CLIENT_ID']
   @@redirect_url = ENV['SPOTIFY_REDIRECT_URL']
+  REQUIRED_SCOPE = ['user-follow-read', 'user-top-read']
 
   def show
     render "index"
@@ -20,14 +21,14 @@ class SpotifyController < ApplicationController
     session[:spotify_random] = spotify_random
 
     # move this out of here, dependency injection, how is it done? I need a singleton for this!
-    spotify_client = SpotifyClient.new(secret: @@secret, client_id: @@client_id, scope: Spotify::REQUIRED_SCOPE)
+    spotify_client = SpotifyClient.new(secret: @@secret, client_id: @@client_id, scope: REQUIRED_SCOPE)
     redirect_to(spotify_client.get_user_login_url(@@redirect_url, spotify_random))
   end
 
   def authorize_finish
     begin
       # move this out of here, dependency injection, how is it done? I need a singleton for this!
-      spotify_client = SpotifyClient.new(secret: @@secret, client_id: @@client_id, scope: Spotify::REQUIRED_SCOPE)
+      spotify_client = SpotifyClient.new(secret: @@secret, client_id: @@client_id, scope: REQUIRED_SCOPE)
       spotify_user = spotify_client.connect(params['code'], @@redirect_url, session[:spotify_random], params['state'])
 
       session[:spotify_user] = spotify_user
