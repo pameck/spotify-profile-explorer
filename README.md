@@ -1,3 +1,5 @@
+[![Build Status](https://snap-ci.com/pameck/spotify-profile-explorer/branch/master/build_image)](https://snap-ci.com/pameck/spotify-profile-explorer/branch/master)
+
 # Spotify Profile Explorer
 
 This is a Web application that will let you find things about your Spotify profile you didn't know about.
